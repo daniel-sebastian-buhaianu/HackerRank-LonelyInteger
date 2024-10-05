@@ -4,37 +4,21 @@ import java.security.*;
 import java.text.*;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.function.*;
 import java.util.regex.*;
-import java.util.stream.*;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
-class Result {
-
-    /*
-     * Complete the 'lonelyinteger' function below.
-     *
-     * The function is expected to return an INTEGER.
-     * The function accepts INTEGER_ARRAY a as parameter.
-     */
-
-    public static int lonelyinteger(List<Integer> a) {
-        int[] count = new int[101];
+class Result
+{
+    public static int lonelyinteger(List<Integer> a)
+    {
+        int result = 0;
         
-        for (Integer number : a) {
-            count[number]++;
+        for (int num : a)
+        {
+            result ^= num;
         }
         
-        for (int number = 0; number <= 100; number++) {
-            if (count[number] == 1) {
-                return number;
-            }
-        }
-        
-        return 0;
+        return result;
     }
-
 }
 
 public class Solution {
@@ -44,9 +28,14 @@ public class Solution {
 
         int n = Integer.parseInt(bufferedReader.readLine().trim());
 
-        List<Integer> a = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-            .map(Integer::parseInt)
-            .collect(toList());
+        String[] aTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> a = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int aItem = Integer.parseInt(aTemp[i]);
+            a.add(aItem);
+        }
 
         int result = Result.lonelyinteger(a);
 
